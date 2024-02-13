@@ -1,0 +1,17 @@
+name: Execute JavaScript File
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow on
+
+jobs:
+  execute_js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run JavaScript file
+        run: node update_external_readme.js
