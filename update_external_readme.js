@@ -72,9 +72,11 @@ function convertAndCopyFiles(sourceDir, destinationDir) {
   traverseDirectory(sourceDir);
 }
 
+const token =  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
+
 const repositoryUrls = [
   {
-    url: "https://HarshikaMShetty@github.com/HarshikaMShetty/Docusaurus-Test.git",
+    url: `https://HarshikaMShetty:${token}@github.com/HarshikaMShetty/Docusaurus-Test.git`,
     branch: "test",
   },
 ];
