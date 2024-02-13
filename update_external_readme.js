@@ -1,6 +1,9 @@
 const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+require('dotenv').config();
+
+const pat = process.env.MY_PAT;
 
 function cloneRepository(repositoryUrl, destinationDir, branch = "test") {
   execSync(
@@ -72,11 +75,10 @@ function convertAndCopyFiles(sourceDir, destinationDir) {
   traverseDirectory(sourceDir);
 }
 
-const token =  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
 
 const repositoryUrls = [
   {
-    url: `https://HarshikaMShetty:${token}@github.com/HarshikaMShetty/Docusaurus-Test.git`,
+    url: `https://HarshikaMShetty:${pat}@github.com/HarshikaMShetty/Docusaurus-Test.git`,
     branch: "test",
   },
 ];
