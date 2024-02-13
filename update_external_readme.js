@@ -4,7 +4,7 @@ const path = require("path");
 require('dotenv').config();
 
 const pat = process.env.MY_PAT;
-
+console.log(pat);
 function cloneRepository(repositoryUrl, destinationDir, branch = "test") {
   execSync(
     `git clone --single-branch --branch ${branch} ${repositoryUrl} ${destinationDir}`
