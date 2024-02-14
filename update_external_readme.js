@@ -77,7 +77,7 @@ function convertAndCopyFiles(sourceDir, destinationDir) {
 
 const repositoryUrls = [
   {
-    url: `https://HarshikaMShetty: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@github.com/HarshikaMShetty/Docusaurus-Test.git`,
+    url: `https://HarshikaMShetty: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@github.com/HarshikaMShetty/Docusaurus-Test.git`,
     branch: "test",
   },
 ];
