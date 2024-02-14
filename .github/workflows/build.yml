@@ -1,6 +1,7 @@
 name: Execute JavaScript File
 
 on:
+  workflow_dispatch:
   repository_dispatch:
     types: [trigger-execution]  
 
