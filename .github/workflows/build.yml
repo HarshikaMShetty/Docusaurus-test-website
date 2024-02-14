@@ -1,0 +1,25 @@
+name: Execute JavaScript File
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-execution]  
+
+jobs:
+  execute_js:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger External Workflow
+      run: |
+        curl -X POST \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
+          https://api.github.com/repos/HarshikaMShetty/Docusaurus-test-website/dispatches \
+          -d '{"event_type": "trigger-execution", "client_payload": {}}'
+              
+    - name: Checkout repository
+      uses: actions/checkout@v3
+ 
+    - name: Run JavaScript file
+      run: node update_external_readme.js
