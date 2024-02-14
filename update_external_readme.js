@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const mySecret = process.env.MY_SECRET;
-console.log(mySecret,"my secret key");
+
 function cloneRepository(repositoryUrl, destinationDir, branch = "test") {
   execSync(
     `git clone --single-branch --branch ${branch} ${repositoryUrl} ${destinationDir}`
@@ -39,6 +39,10 @@ function convertAndCopyFiles(sourceDir, destinationDir) {
             const lastFolder = path.basename(directory).split(".")[1];
             markdownFileName =
               lastFolder.charAt(0).toUpperCase() + lastFolder.slice(1) + ".md";
+              const filePath = path.join(destinationDir, markdownFileName)
+            if(item.name === "action.js" &&  fs.existsSync(filePath)){
+                console.log(fs.existsSync(filePath)) 
+                fs.writeFileSync(filePath, '')            }
           }
           if (!item.name.toLowerCase().startsWith("readme")) {
             //convert js files to markdown
