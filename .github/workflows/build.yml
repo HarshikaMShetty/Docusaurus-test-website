@@ -23,3 +23,5 @@ jobs:
  
     - name: Run JavaScript file
       run: node update_external_readme.js
+      env:
+          MY_SECRET: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
