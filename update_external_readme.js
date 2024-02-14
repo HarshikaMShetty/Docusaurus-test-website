@@ -1,9 +1,9 @@
 const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
-// require('dotenv').config();
 
-// const pat = process.env.MY_PAT;
+const mySecret = process.env.MY_SECRET;
+console.log(mySecret,"my secret key");
 function cloneRepository(repositoryUrl, destinationDir, branch = "test") {
   execSync(
     `git clone --single-branch --branch ${branch} ${repositoryUrl} ${destinationDir}`
@@ -74,13 +74,13 @@ function convertAndCopyFiles(sourceDir, destinationDir) {
   traverseDirectory(sourceDir);
 }
 
-
 const repositoryUrls = [
   {
-    url: `https://HarshikaMShetty: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@github.com/HarshikaMShetty/Docusaurus-Test.git`,
+    url: `https://HarshikaMShetty:${mySecret}@github.com/HarshikaMShetty/Docusaurus-Test.git`,
     branch: "test",
   },
 ];
+
 const destinationDir = path.join(__dirname, "..", "my-website", "docs"); // Assuming the script is located in the root of your Docusaurus project
 
 async function processRepositories() {
