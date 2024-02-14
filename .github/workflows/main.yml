@@ -18,7 +18,7 @@ jobs:
           -d '{"event_type": "trigger-execution", "client_payload": {}}'
               
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
  
     - name: Run JavaScript file
       run: node update_external_readme.js
