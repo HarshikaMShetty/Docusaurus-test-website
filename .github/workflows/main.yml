@@ -1,17 +1,24 @@
 name: Execute JavaScript File
 
 on:
-  push:
-    branches:
-      - main  # Change this to the branch you want to trigger the workflow on
+  repository_dispatch:
+    types: [trigger-execution]  
 
 jobs:
   execute_js:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Run JavaScript file
-        run: node update_external_readme.js
+    - name: Trigger External Workflow
+      run: |
+        curl -X POST \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
+          https://api.github.com/repos/HarshikaMShetty/Docusaurus-test-website/dispatches \
+          -d '{"event_type": "trigger-execution", "client_payload": {}}'
+              
+    - name: Checkout repository
+      uses: actions/checkout@v2
+ 
+    - name: Run JavaScript file
+      run: node update_external_readme.js
