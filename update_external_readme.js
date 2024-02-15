@@ -85,7 +85,10 @@ const repositoryUrls = [
   },
 ];
 
-const destinationDir = path.join(__dirname, "..", "my-website", "docs"); // Assuming the script is located in the root of your Docusaurus project
+// const destinationDir = path.join(__dirname, "..", "my-website", "docs"); // Assuming the script is located in the root of your Docusaurus project
+
+const gitRootDir = process.cwd(); // Get the current working directory (root of the Git repository)
+const destinationDir = path.join(gitRootDir, "docs");
 
 async function processRepositories() {
   for (const { url, branch } of repositoryUrls) {
