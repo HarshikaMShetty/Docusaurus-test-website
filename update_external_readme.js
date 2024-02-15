@@ -99,13 +99,13 @@ async function processRepositories() {
       fs.rmdirSync(tempCloneDir, { recursive: true }); // Clean up temporary clone directory
 
       // Set author's identity
-      execSync(`git config --global user.email "you@example.com"`);
-      execSync(`git config --global user.name "Your Name"`);
-      
+      execSync(`git config --global user.email "harshika.k@juegostusioz.com"`);
+      execSync(`git config --global user.name "HarshikaMShetty"`);
+
       const commitMessage = "Readme update by the script";
       execSync(`git add .`, { cwd: destinationDir });
       execSync(`git commit -m "${commitMessage}"`, { cwd: destinationDir });
-      execSync(`git push origin ${branch}`, { cwd: destinationDir });
+      execSync(`git push`, { cwd: destinationDir });
     }
     catch(error){
       console.error(`Error processing repository ${url}:`, error);
