@@ -97,6 +97,11 @@ async function processRepositories() {
       await cloneRepository(url, tempCloneDir, branch);
       await convertAndCopyFiles(tempCloneDir, destinationDir);
       fs.rmdirSync(tempCloneDir, { recursive: true }); // Clean up temporary clone directory
+
+      const commitMessage = "Readme update by the script";
+      execSync(`git add .`, { cwd: destinationDir });
+      execSync(`git commit -m "${commitMessage}"`, { cwd: destinationDir });
+      execSync(`git push origin ${branch}`, { cwd: destinationDir });
     }
     catch(error){
       console.error(`Error processing repository ${url}:`, error);
