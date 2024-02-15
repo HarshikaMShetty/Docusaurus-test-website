@@ -4,7 +4,7 @@ const path = require("path");
 
 const mySecret = process.env.MY_SECRET;
 
-function cloneRepository(repositoryUrl, destinationDir, branch = "test") {
+async function cloneRepository(repositoryUrl, destinationDir, branch = "test") {
   execSync(
     `git clone --single-branch --branch ${branch} ${repositoryUrl} ${destinationDir}`
   );
@@ -26,7 +26,7 @@ function writeToFile(
   fs.writeFileSync(destinationFilePath, markdownContent);
 }
 
-function convertAndCopyFiles(sourceDir, destinationDir) {
+async function convertAndCopyFiles(sourceDir, destinationDir) {
   // Recursive function to traverse directories
   function traverseDirectory(directory, markdownFileName = "") {
     fs.readdirSync(directory, { withFileTypes: true }).forEach((item) => {
@@ -90,10 +90,14 @@ const destinationDir = path.join(__dirname, "..", "my-website", "docs"); // Assu
 async function processRepositories() {
   for (const { url, branch } of repositoryUrls) {
     const tempCloneDir = path.join(__dirname, "temp");
-    await cloneRepository(url, tempCloneDir, branch);
-    // readContent(tempCloneDir)
-    await convertAndCopyFiles(tempCloneDir, destinationDir);
-    fs.rmdirSync(tempCloneDir, { recursive: true }); // Clean up temporary clone directory
+    try{
+      await cloneRepository(url, tempCloneDir, branch);
+      await convertAndCopyFiles(tempCloneDir, destinationDir);
+      fs.rmdirSync(tempCloneDir, { recursive: true }); // Clean up temporary clone directory
+    }
+    catch(error){
+      console.error(`Error processing repository ${url}:`, error);
+    }
   }
 }
 
