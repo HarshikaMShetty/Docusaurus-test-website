@@ -98,6 +98,10 @@ async function processRepositories() {
       await convertAndCopyFiles(tempCloneDir, destinationDir);
       fs.rmdirSync(tempCloneDir, { recursive: true }); // Clean up temporary clone directory
 
+      // Set author's identity
+      execSync(`git config --global user.email "you@example.com"`);
+      execSync(`git config --global user.name "Your Name"`);
+      
       const commitMessage = "Readme update by the script";
       execSync(`git add .`, { cwd: destinationDir });
       execSync(`git commit -m "${commitMessage}"`, { cwd: destinationDir });
